@@ -8,7 +8,7 @@
  *
  */
 
-namespace Leeloo;
+namespace Webds\Leeloo;
 
 interface ApiInterface
 {
