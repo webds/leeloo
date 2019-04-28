@@ -1,7 +1,7 @@
 {
   "name": "webds/leeloo",
   "type": "library",
-  "description": "Простая обертка для работы с API leeloo",
+  "description": "РџСЂРѕСЃС‚Р°СЏ РѕР±РµСЂС‚РєР° РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ API leeloo",
   "license": "MIT",
   "authors": [
     {
