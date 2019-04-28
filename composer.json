@@ -1,0 +1,21 @@
+{
+  "name": "webds/leeloo",
+  "type": "library",
+  "description": "Простая обертка для работы с API leeloo",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Roman WebDS",
+      "email": "info@webds.net",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Leeloo\\": "src/"
+    }
+  }
+}
