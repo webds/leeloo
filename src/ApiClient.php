@@ -14,7 +14,7 @@ use stdClass;
 class ApiClient implements ApiInterface
 {
 
-    private $apiUrl = 'https://api.leeloo.ai/api/v1/';
+    private $apiUrl = 'https://api.leeloo.ai/api/v1';
 
     private $TokenRead;
     private $TokenWrite;
@@ -80,7 +80,7 @@ class ApiClient implements ApiInterface
                     $url .= '?' . http_build_query($data);
                 }
         }
-
+        //var_dump($url,$data);die;
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
@@ -96,15 +96,13 @@ class ApiClient implements ApiInterface
 
         curl_close($curl);
 
-        if ($headerCode === 401 && $this->refreshToken === 0) {
-            ++$this->refreshToken;
-            $this->getToken();
-            $retval = $this->sendRequest($path, $method, $data);
-        } else {
+       // if ($headerCode === 401 && $this->refreshToken === 0) {
+       //     $retval = $this->sendRequest($path, $method, $data);
+       // } else {
             $retval = new stdClass();
             $retval->data = json_decode($responseBody);
             $retval->http_code = $headerCode;
-        }
+       // }
 
         return $retval;
     }
@@ -160,7 +158,7 @@ class ApiClient implements ApiInterface
      *
      * @return stdClass
      */
-    public function order($paymentCreditsId,
+    public function orders($paymentCreditsId,
                           $email,
                           $phone,
                           $transactionDate,
@@ -168,12 +166,21 @@ class ApiClient implements ApiInterface
                           $accountId,
                           $isNotifyAccount)
     {
-        if (empty($bookName)) {
-            return $this->handleError('Empty book name');
+        if (empty($accountId)) {
+            return $this->handleError('Empty accountId');
         }
 
-        $data = array('bookName' => $bookName);
-        $requestResult = $this->sendRequest('addressbooks', 'POST', $data);
+        $data = [];
+        $data['paymentCreditsId']   = $paymentCreditsId;
+        $data['email']              = $email;
+        $data['phone']              = $phone;
+        $data['transactionDate']    = $transactionDate;
+        $data['offerId']            = $offerId;
+        $data['accountId']          = $accountId;
+        $data['isNotifyAccount']    = $isNotifyAccount;
+
+
+        $requestResult = $this->sendRequest('orders', 'POST', $data);
 
         return $this->handleResult($requestResult);
     }
