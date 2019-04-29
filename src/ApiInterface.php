@@ -18,7 +18,7 @@ interface ApiInterface
      *
      * @param $bookName
      */
-    public function order(
+    public function orders(
         $paymentCreditsId,
         $email,
         $phone,
