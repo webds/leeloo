@@ -57,7 +57,7 @@ class ApiClient implements ApiInterface
         $method = strtoupper($method);
         $curl = curl_init();
 
-        if ($useToken && !empty($this->token)) {
+        if ($useToken && !empty($this->TokenWrite)) {
             $headers = array('X-Leeloo-AuthToken: ' . $this->TokenWrite);
             curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
         }
